@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 
 :inicio
 REM Inicializamos la variable de opción
@@ -44,7 +44,7 @@ goto:inicio
 :reemplazo
 	
 	REM xcopy copiará y reemplazará el archivo que ya se tiene en la carpeta
-	xcopy \\IT_DGARCIA\ArchivosCompartidos\Oracle\TNSNames\* C:\orant\NET80\ADMIN /y
+	xcopy "\\inf-l-001\01 - Compartida\gguevara\ArchivosCompartidos\Oracle\TNSNames\*" C:\orant\NET80\ADMIN /y
 	
 	REM Borramos la pantalla
 	echo.

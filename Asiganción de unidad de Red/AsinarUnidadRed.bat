@@ -15,6 +15,6 @@ echo %DATE% ^|%TIME%
 echo.
 
 REM Asignamos la unidad de red
-net use Y: \\10.4.2.2\master
+net use Z: \\10.4.2.2\master
 
 Pause
