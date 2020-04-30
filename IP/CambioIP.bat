@@ -22,6 +22,12 @@ netsh interface ip set dnsservers "Ethernet" static 10.5.2.50 validate=no primar
 REM Agregamos otro DNS al adptadors
 REM netsh interface ip set dnsservers "Ethernet" static 10.4.0.8 validate=no
 
+REM Reniciamos el adaptador
+REM Deshabilitar
+netsh interface set interface Ethernet disable
+REM Habilitar
+netsh interface set interface Ethernet enable
+
 echo.
 echo Listo, ip cambiada
 

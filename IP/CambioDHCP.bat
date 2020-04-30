@@ -19,6 +19,12 @@ REM Regresamos el adpatador a DHCP
 netsh interface ipv4 set address "Ethernet" source=DHCP
 netsh interface ipv4 set dnsservers "Ethernet" source=DHCP
 
+REM Reniciamos el adaptador
+REM Deshabilitar
+netsh interface set interface Ethernet disable
+REM Habilitar
+netsh interface set interface Ethernet enable
+
 echo.
 echo Listo, adaptador en DHCP
 

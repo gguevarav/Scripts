@@ -11,7 +11,7 @@ echo Empagua
 echo Mapeo de Unidades de Red
 echo Espere...
 echo Cargando...
-echo %DATE% ^|%TIME% 
+echo %DATE% ^| %TIME% 
 echo.
 
 REM Retardo
@@ -22,24 +22,26 @@ REM Mostramos el menú
 echo ----------------------------------------------------
 echo --------------------Bienvenido----------------------
 echo ----------------------------------------------------
-echo ----- Configuraciones post instalación de STC ------
+echo ----- Configuraciones post-instalacion de STC ------
 echo ----------------------------------------------------
 echo    Escoja un opcion en el siguiente menu:
 echo 		1. Mapeo de unidad de red
-echo 		2. Instalacion de registros
-echo 		3. Salir
+echo		2. Instalacion de TNSNames
+echo		3. Instalacion de registros
+echo 		4. Salir
 echo.
 
 REM Opciones
-set /p OpcionMenuInicial= ^> Seleccione una opcion [1-3]:
+set /p OpcionMenuInicial= ^> Seleccione una opcion [1-4]:
 
 REM Validamos la seleccion
 IF "%OpcionMenuInicial%"=="1" GOTO asignar
-IF "%OpcionMenuInicial%"=="2" GOTO registros
-IF "%OpcionMenuInicial%"=="3" GOTO salir
+IF "%OpcionMenuInicial%"=="2" GOTO tnsnames
+IF "%OpcionMenuInicial%"=="3" GOTO registros
+IF "%OpcionMenuInicial%"=="4" GOTO salir
 
 REM Si no se ah ingresado la opción correcta
-echo. El numero "%var%" no es una opcion valida, por favor intente de nuevo.
+echo. El numero "%OpcionMenuInicial%" no es una opcion valida, por favor intente de nuevo.
 echo.
 pause
 echo.
@@ -55,6 +57,17 @@ goto:inicio
 	echo.
 	REM Pausa
 	Pause
+goto:inicio
+
+:tnsnames
+	REM xcopy copiará y reemplazará el archivo que ya se tiene en la carpeta
+	xcopy "\\inf-l-001\01 - Compartida\gguevara\ArchivosCompartidos\Oracle\TNSNames\*" C:\orant\NET80\ADMIN /y
+	
+	REM Borramos la pantalla
+	echo.
+	echo. Listo, instalacion realizada.
+	pause
+	
 goto:inicio
 
 :registros
@@ -76,7 +89,7 @@ echo		4. SIAF
 echo 		5. Regresar
 echo.
 
-set /p OpcionMenu= ^> Seleccione una opcion [1-3]:
+set /p OpcionMenu= ^> Seleccione una opcion [1-5]:
 
 REM Validamos la seleccion
 IF "%OpcionMenu%"=="1" GOTO auditoria
@@ -86,7 +99,7 @@ IF "%OpcionMenu%"=="4" GOTO siaf
 IF "%OpcionMenu%"=="5" GOTO salir
 
 REM Si no se ah ingresado la opción correcta
-echo. El numero "%var%" no es una opcion valida, por favor intente de nuevo.
+echo. El numero "%OpcionMenu%" no es una opcion valida, por favor intente de nuevo.
 echo.
 pause
 echo.
@@ -97,14 +110,9 @@ REM Auditoria
 	REM Borramos la pantalla
 	CLS
 
-	REM Solicitamos la letra de la unidad de red
-	echo Ingrese la letra de la unidad, por defecto es la letra Y:
-	echo %PROCESSOR_ARCHITECTURE%
-	set /p Unidad=Letra:
-	echo.
-
 	REM Este es el contenido de la Clave, se concatenerá con la letra de la unidad
 	SET PuntoyComa=;
+	SET Unidad=Z
 	SET apu=:\apu\fm
 	SET aud=:\aud\fm
 	SET bel=:\bel\fm
@@ -132,7 +140,7 @@ REM Auditoria
 	REM Si el sistema es de 64 bits
 	IF "%PROCESSOR_ARCHITECTURE%" == "AMD64" GOTO x64
 	REM Si el sistema es de 32 bits
-	IF "%PROCESSOR_ARCHITECTURE%" == "AMD64" GOTO x32
+	IF "%PROCESSOR_ARCHITECTURE%" == "x86" GOTO x32
 	
 	:x64
 		REM Mapeo de formularios
@@ -166,14 +174,9 @@ REM SIAF
 	REM Borramos la pantalla
 	CLS
 
-	REM Solicitamos la letra de la unidad de red
-	echo Ingrese la letra de la unidad, por defecto es la letra Y:
-	echo %PROCESSOR_ARCHITECTURE%
-	set /p Unidad=Letra:
-	echo.
-
 	REM Este es el contenido de la Clave, se concatenerá con la letra de la unidad
 	SET PuntoyComa=;
+	SET Unidad=Z
 	SET siaffm=:\siaf\fm
 	SET siafmn=:\siaf\mn
 
@@ -191,7 +194,7 @@ REM SIAF
 	REM Si el sistema es de 64 bits
 	IF "%PROCESSOR_ARCHITECTURE%" == "AMD64" GOTO x64
 	REM Si el sistema es de 32 bits
-	IF "%PROCESSOR_ARCHITECTURE%" == "AMD64" GOTO x32
+	IF "%PROCESSOR_ARCHITECTURE%" == "x86" GOTO x32
 	
 	:x64
 		REM Mapeo de formularios
