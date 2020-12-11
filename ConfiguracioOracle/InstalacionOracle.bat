@@ -25,10 +25,13 @@ echo ----------------------------------------------------
 echo ----- Configuraciones post-instalacion de STC ------
 echo ----------------------------------------------------
 echo    Escoja un opcion en el siguiente menu:
-echo 		1. Mapeo de unidad de red
+echo		1. Mapeo de unidad de red
 echo		2. Instalacion de TNSNames
 echo		3. Instalacion de registros
-echo 		4. Salir
+echo		4. Salir
+echo ----------------------------------------------------
+echo -------------- GGuevara - Infra - 2020 -------------
+echo ----------------------------------------------------
 echo.
 
 REM Opciones
@@ -83,12 +86,15 @@ echo Instalacion de registros de mapeo de unidades de red
 echo para el sistema SIAF
 echo ----------------------------------------------------
 echo    Escoja un departamento en el siguiente menu:
-echo 		1. Auditoria
-echo 		2. Compras
-echo 		3. Finanzas
+echo		1. Auditoria
+echo		2. Compras
+echo		3. Finanzas
 echo		4. SIAF
 echo		5. Direccion Comercial
-echo 		6. Regresar
+echo		6. Regresar
+echo ----------------------------------------------------
+echo -------------- GGuevara - Infra - 2020 -------------
+echo ----------------------------------------------------
 echo.
 
 set /p OpcionMenu= ^> Seleccione una opcion [1-5]:
@@ -139,6 +145,28 @@ REM Auditoria
 	SET e202=:\ico\e202
 	SET e203=:\ico\e203
 	SET ContenidoIconos=%Unidad%%e97%%PuntoyComa%%Unidad%%e201%%PuntoyComa%%Unidad%%e202%%PuntoyComa%%Unidad%%e203%
+
+	REM Creamos el acceso directo de la aplicacion
+	REM En este apartado primero creamos un archivo vbs linea por linea con lo que necesitamos
+	REM luego se crea el acceso directo y se elimina el archivo de script creado
+	cls
+		ECHO Set objShell = WScript.CreateObject("WScript.Shell") >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO ficheroAccesoDirecto = "%USERPROFILE%\Desktop\Auditoria.lnk" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO Set objAccesoDirecto = objShell.CreateShortcut(ficheroAccesoDirecto) >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.TargetPath = "C:\orant\BIN\ifrun60.EXE" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Arguments = "Auditoria" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Description = "Sistema comercial antiguo" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.HotKey = "ALT+CTRL+N" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.IconLocation = "C:\orant\BIN\ifrun60.EXE, 2" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.WindowStyle = "1" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.WorkingDirectory = "C:\orant\BIN" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Save >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ATTRIB +h +s "%USERPROFILE%\Desktop\accsdirecto.vbs"
+		cls
+		START /B /WAIT %USERPROFILE%\Desktop\accsdirecto.vbs
+		CLS
+		erase /Q /a h s "%USERPROFILE%\Desktop\accsdirecto.vbs"
+	cls
 	
 	REM Si el sistema es de 64 bits
 	IF "%PROCESSOR_ARCHITECTURE%" == "AMD64" GOTO x64
@@ -193,6 +221,28 @@ REM SIAF
 	SET e202=:\ico\e202
 	SET e203=:\ico\e203
 	SET ContenidoIconos=%Unidad%%e97%%PuntoyComa%%Unidad%%e201%%PuntoyComa%%Unidad%%e202%%PuntoyComa%%Unidad%%e203%
+
+	REM Creamos el acceso directo de la aplicacion
+	REM En este apartado primero creamos un archivo vbs linea por linea con lo que necesitamos
+	REM luego se crea el acceso directo y se elimina el archivo de script creado
+	cls
+		ECHO Set objShell = WScript.CreateObject("WScript.Shell") >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO ficheroAccesoDirecto = "%USERPROFILE%\Desktop\SIAF.lnk" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO Set objAccesoDirecto = objShell.CreateShortcut(ficheroAccesoDirecto) >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.TargetPath = "C:\orant\BIN\ifrun60.EXE" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Arguments = "fmenu_siaf" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Description = "Sistema comercial antiguo" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.HotKey = "ALT+CTRL+N" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.IconLocation = "C:\orant\BIN\ifrun60.EXE, 2" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.WindowStyle = "1" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.WorkingDirectory = "C:\orant\BIN" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Save >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ATTRIB +h +s "%USERPROFILE%\Desktop\accsdirecto.vbs"
+		cls
+		START /B /WAIT %USERPROFILE%\Desktop\accsdirecto.vbs
+		CLS
+		erase /Q /a h s "%USERPROFILE%\Desktop\accsdirecto.vbs"
+	cls
 	
 	REM Si el sistema es de 64 bits
 	IF "%PROCESSOR_ARCHITECTURE%" == "AMD64" GOTO x64
@@ -240,6 +290,28 @@ REM Direccion comercial
 	REM Concatenación de todas las carpetas para enviarlas como una sola variable y para que no sea...
 	REM ... muy extensa la línea de código
 	SET Contenido=%Unidad%%apu%%PuntoyComa%%Unidad%%aud%%PuntoyComa%%Unidad%%bel%%PuntoyComa%%Unidad%%caj%%PuntoyComa%%Unidad%%cob%%PuntoyComa%%Unidad%%dsufm%%PuntoyComa%%Unidad%%apumn%%PuntoyComa%%Unidad%%fac%%PuntoyComa%%Unidad%%ins%%PuntoyComa%%Unidad%%test%%PuntoyComa%%Unidad%%dsumn%%PuntoyComa%
+
+	REM Creamos el acceso directo de la aplicacion
+	REM En este apartado primero creamos un archivo vbs linea por linea con lo que necesitamos
+	REM luego se crea el acceso directo y se elimina el archivo de script creado
+	cls
+		ECHO Set objShell = WScript.CreateObject("WScript.Shell") >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO ficheroAccesoDirecto = "%USERPROFILE%\Desktop\DireccionComercial.lnk" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO Set objAccesoDirecto = objShell.CreateShortcut(ficheroAccesoDirecto) >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.TargetPath = "C:\orant\BIN\ifrun60.EXE" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Arguments = "instalaciones" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Description = "Sistema comercial antiguo" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.HotKey = "ALT+CTRL+N" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.IconLocation = "C:\orant\BIN\ifrun60.EXE, 2" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.WindowStyle = "1" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.WorkingDirectory = "C:\orant\BIN" >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ECHO objAccesoDirecto.Save >>%USERPROFILE%\Desktop\accsdirecto.vbs
+		ATTRIB +h +s "%USERPROFILE%\Desktop\accsdirecto.vbs"
+		cls
+		START /B /WAIT %USERPROFILE%\Desktop\accsdirecto.vbs
+		CLS
+		erase /Q /a h s "%USERPROFILE%\Desktop\accsdirecto.vbs"
+	cls
 
 	REM Definimos el contenido del registro para los íconos
 	SET ico=:\ico
