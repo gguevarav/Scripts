@@ -1,0 +1,68 @@
+Correo
+http://mail.empagua.com
+
+STCv6
+http://10.4.2.10:8088/stcv6
+Cualquier navegador
+
+Reportes Empagua
+http://10.4.2.10:8090/desareports
+Cualquier navegador
+
+SIG
+https://sig.empagua.com/sig.asp
+Cualquier navegador
+
+SL
+http://sl.empagua.com/empagua
+Cualquier navegador
+
+SIGE
+http://intranet:8088/sige/Action#no
+Chrome
+
+Facturas
+http://10.4.2.9:8088/facturas/
+Chrome
+
+Tickets
+http://10.4.2.9/tickets
+Cualquiera
+
+Inventario
+http://10.4.2.9/infrainv
+Cualquiera
+
+Repo ESET
+http://10.4.2.9/eset
+Cualquiera
+
+Sistema de Contratos
+http://10.4.2.9:8087/emp_mctr/Action#no
+Chrome
+
+SCEPOT
+http://10.4.2.9:8088/scepot
+Chrome
+
+Sitema de inventarios
+http://10.4.2.9:8088/sai
+Chrome
+
+Sistema de ordenes de pago
+http://10.4.2.9:8088/sop/
+Chrome
+
+KAHI
+http://kahi.empagua.com/
+Chrome
+
+Dashboard
+http://10.4.2.9:8087/emp_grafic
+Cualquiera
+
+Flujo bancos
+http://10.4.2.9:8088/flujobancos
+
+Sistema de colas
+http://web.empagua.com:8087/emp_sgc
